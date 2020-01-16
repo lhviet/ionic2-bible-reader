@@ -1,0 +1,75 @@
+
+<ion-view view-title="Setting" ng-init="init()">
+
+  <!-- For listing words in default/search -->
+  <ion-content has-bouncing="true">
+    <div class="list">
+      <div class="item item-divider" ng-class="fontSizeClass">
+        Display Setting
+      </div>
+      <ion-item menu-close class="item-icon-right" ng-class="fontSizeClass">
+        Font-size (zooming) <br>
+        <span ng-bind-html="'font-size = '+fontSize"></span>
+        <i class="icon ion-minus-circled" ng-show="fontSize > 14" on-tap="decreaseFontSize()" style="right:40px;"></i>
+        <i class="icon ion-plus-circled" ng-show="fontSize < 49" on-tap="increaseFontSize()"></i>
+      </ion-item>
+
+      <div class="item item-divider" ng-class="fontSizeClass">
+        Text-to-Speech Setting
+      </div>
+      <ion-item menu-close class="item-icon-right" ng-class="fontSizeClass">
+        Speaking Speed <br>
+        <span ng-bind-html="'speed = '+speakingSpeed"></span>
+        <i class="icon ion-minus-circled" on-tap="decreaseSpeakingSpeed()" ng-show="speakingSpeed > 0.5" style="right:40px;"></i>
+        <i class="icon ion-plus-circled" on-tap="increaseSpeakingSpeed()" ng-show="speakingSpeed < 9"></i>
+      </ion-item>
+
+      <div class="item item-divider" ng-class="fontSizeClass">
+        <div class="row padding0">
+          <div class="col col-67">
+            Current Using Bible
+          </div>
+          <div class="col">
+            <b>{{primary_bible}}</b>
+          </div>
+        </div>
+      </div>
+      <ion-item menu-close ng-class="fontSizeClass">
+        <div class="row padding0">
+          <div class="col col-67 col-center">
+            Set secondary bible
+          </div>
+          <div class="col">
+            <button class="button button-calm" ng-class="fontSizeClass" on-tap="openPopoverBibles($event)">
+              {{secondary_bible}}
+            </button>
+          </div>
+        </div>
+      </ion-item>
+
+      <div class="item item-divider" ng-class="fontSizeClass">
+        <div class="row padding0">
+          <div class="col col-75">
+            Dual Bible Mode
+          </div>
+          <div class="col">
+            <b>{{isDualBible?'Enabled':'Disabled'}}</b>
+          </div>
+        </div>
+      </div>
+      <ion-item menu-close class="item-icon-right" ng-class="fontSizeClass" on-tap="toggleDualBible()">
+        <div class="row padding0">
+          <div class="col col-90 full-text">
+            Enable will let both Primary & Secondary bibles showed in the same page.<br>
+            Disable will display only one bible when clicking switch button.
+          </div>
+          <div class="col">
+            <i class="icon" ng-class="isDualBible==true?'ion-android-checkbox-outline':'ion-android-checkbox-outline-blank'"></i><br>
+          </div>
+        </div>
+      </ion-item>
+
+    </div>
+  </ion-content>
+
+</ion-view>

@@ -1,0 +1,60 @@
+<ion-view view-title="Bookmark" ng-init="init()" hide-back-button="true">
+
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-ios-arrow-back" ui-sref="app.home">
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon button-clear ion-trash-a" on-tap="toggleDeleteBtn()">
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <div class="tabs tabs-icon-only">
+    <a nav-clear class="tab-item disable-user-behavior active" title="Bookmark"
+       icon-on="ion-ios-bookmarks" icon-off="ion-ios-bookmarks-outline" ui-sref="default.bookmark">
+      <i class="icon ion-ios-bookmarks"></i>
+      <span class="tab-title ng-binding" ng-bind-html="Bookmark"></span>
+    </a>
+    <a nav-clear class="tab-item disable-user-behavior" title="History"
+       icon-on="ion-ios-refresh" icon-off="ion-ios-refresh-outline" ui-sref="default.history">
+      <i class="icon ion-ios-refresh"></i>
+      <span class="tab-title ng-binding" ng-bind-html="History"></span>
+    </a>
+  </div>
+  <ion-content class="bottom50">
+    <div class="row text-center">
+      <button class="button button-block button-assertive" ng-class="fontSizeClass"
+              ng-if="bookmarks.length > 0"
+              on-tap="deleteAllBookmark()">
+        Clear The Bookmarks ({{bookmarks.length}})
+      </button>
+    </div>
+    <ion-list class="zebra-list">
+      <ion-item menu-close ng-if="bookmarks.length < 1" class="center-text"><b>No Bookmark!</b><br> You have not read any chapter of the Bible.</ion-item>
+      <ion-item menu-close class="padding0" collection-repeat="bookmarkItem in bookmarks track by $index">
+        <div class="row" ng-class="fontSizeClass" on-tap="restoreBookmarkHistory(bookmarkItem)">
+          <div class="col order-number" ng-class="fontNumberClass">
+            {{$index+1}}
+          </div>
+          <div class="col col-60 padding-left">
+            <b>{{ bookmarkItem.book_name }}</b>
+          </div>
+          <div class="col">
+            <b>{{ bookmarkItem.chapter }}</b>
+          </div>
+          <div class="col col-center text-center border-left">
+            {{ bookmarkItem.book < 470 ? 'old':'new' }}
+          </div>
+          <div class="col col-10 border-left text-center" ng-if="isShowDelete" on-tap="deleteBookmark(bookmarkItem)">
+            <i class="icon ion-minus-circled assertive"></i>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-view>

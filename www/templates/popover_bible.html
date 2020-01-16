@@ -1,0 +1,14 @@
+<div class="background-drop" on-tap="closePopoverBibles()"></div>
+<ion-popover-view>
+  <ion-header-bar ui-sref="default.download_bibles">
+    <div class="title">Bibles</div>
+    <button class="button button-icon icon ion-earth"></button>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list class="zebra-list">
+      <ion-item ng-class="fontUsageClass" ng-repeat="bible in availableBibles_inPopover" on-tap="selectBible(bible.code)">
+        {{bible.code}} - {{bible.label}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-popover-view>

@@ -1,0 +1,43 @@
+<ion-view view-title="History" ng-init="init()" hide-back-button="true">
+  <div class="tabs tabs-icon-only">
+    <a nav-clear class="tab-item disable-user-behavior" title="Bookmark"
+       icon-on="ion-ios-bookmarks" icon-off="ion-ios-bookmarks-outline" ui-sref="default.bookmark">
+      <i class="icon ion-ios-bookmarks"></i>
+      <span class="tab-title ng-binding" ng-bind-html="Bookmark"></span>
+    </a>
+    <a nav-clear class="tab-item disable-user-behavior active" title="History"
+       icon-on="ion-ios-refresh" icon-off="ion-ios-refresh-outline" ui-sref="default.history">
+      <i class="icon ion-ios-refresh"></i>
+      <span class="tab-title ng-binding" ng-bind-html="History"></span>
+    </a>
+  </div>
+  <ion-content class="bottom50">
+    <div class="row text-center">
+      <button class="button button-block button-assertive" ng-class="fontSizeClass"
+              ng-if="histories.length > 0"
+              on-tap="deleteAllHistory()">
+        Clear The Histories ({{histories.length}})
+      </button>
+    </div>
+    <ion-list class="zebra-list">
+      <ion-item menu-close ng-if="histories.length < 1" class="center-text"><b>No History!</b><br> You have not read any chapter of the Bible.</ion-item>
+      <ion-item menu-close class="padding0" collection-repeat="historyItem in histories track by $index">
+        <div class="row" ng-class="fontSizeClass" on-tap="restoreBookmarkHistory(historyItem)">
+          <div class="col order-number" ng-class="fontNumberClass">
+            {{$index+1}}
+          </div>
+          <div class="col col-60 padding-left">
+            <b>{{ historyItem.book_name }}</b>
+          </div>
+          <div class="col col-20">
+            <b>{{ historyItem.chapter }}</b>
+          </div>
+          <div class="col  border-left col-center text-center">
+            {{ historyItem.book < 470 ? 'old':'new' }}
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-view>

@@ -1,0 +1,30 @@
+<div class="background-drop" on-tap="closePopoverChapterSetting()"></div>
+<ion-popover-view>
+  <ion-content>
+    <ion-list class="zebra-list">
+      <ion-item class="item-icon-right" ng-class="fontSizeClass" on-tap="toggleBookmark()">
+        Bookmark chapter
+        <i class="icon ion-ios-bookmarks" ng-class="selectedBook.isSelectedChapterBookmarked?'energized':'color-light-grey'"></i>
+      </ion-item>
+      <ion-item class="item-icon-right" ng-class="fontSizeClass">
+        Font-size
+        <span ng-bind-html="fontSize"></span>
+        <i class="icon ion-minus-circled color-light-grey" ng-show="fontSize > 14" on-tap="decreaseFontSize()" style="right:40px;"></i>
+        <i class="icon ion-plus-circled color-light-grey" ng-show="fontSize < 49" on-tap="increaseFontSize()"></i>
+      </ion-item>
+      <ion-item class="item-icon-right" ng-class="fontSizeClass" ng-if="bibleLang=='en'">
+        Speaking<br>
+        <span ng-bind-html="'speed = '+speakingSpeed"></span>
+        <i class="icon ion-minus-circled color-light-grey" on-tap="decreaseSpeakingSpeed()" ng-show="speakingSpeed > 0.5" style="right:40px;"></i>
+        <i class="icon ion-plus-circled color-light-grey" on-tap="increaseSpeakingSpeed()" ng-show="speakingSpeed < 9"></i>
+      </ion-item>
+      <ion-item class="item-icon-right" ng-class="fontSizeClass" on-tap="toggleCopyMode()">
+        Copy to Clipboard
+        <i class="icon ion-ios-copy" ng-class="isCopyMode?'positive':'color-grey'"></i>
+      </ion-item>
+      <ion-item class="full-text padding5" ng-class="fontSizeClass">
+        Double tap/click on page to enter (exit) the full reading mode.
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-popover-view>

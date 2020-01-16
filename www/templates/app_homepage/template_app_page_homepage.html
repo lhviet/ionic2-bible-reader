@@ -1,0 +1,58 @@
+<ion-view ng-init="init()">
+  <ion-header-bar class="bar-subheader item-input item-search">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="search" placeholder="Search book" ng-model="searchText" ng-change="scrollTop()">
+    <span class="clear-search" on-tap="searchText=''">
+      <i class="icon ion-android-close"></i>
+    </span>
+    <span class="clear-search" on-tap="openHistory($event)">
+      <i class="icon ion-ios-skipbackward-outline"></i>
+    </span>
+  </ion-header-bar>
+  <ion-content scroll="false">
+    <ion-item class="item-icon-right" ng-hide="primary_bible" ui-sref="default.download_bibles">
+      DOWNLOAD YOUR BIBLES...
+      <i class="icon ion-android-download"></i>
+    </ion-item>
+    <ion-pane class="row">
+      <div class="col col-80 position-absolute top_bottom left0">
+        <ion-content>
+          <ion-item class="item-icon-right item-royal"
+                    ng-class="fontUsageClass"
+                    on-tap="toggleGroup(oldNewGroup,0)">
+            Old Testament
+            <i class="icon ion-ios-paw-outline"></i>
+          </ion-item>
+          <ion-list ng-show="isGroupShown(oldNewGroup,0)">
+            <ion-item class="row padding5" ng-repeat="book in books.old | filter : searchText"
+                      ng-class="{'item-assertive':selectedBook.number==book.number}"
+                      on-tap="selectBook(book.number)">
+                <div class="col col-center order-number" ng-class="fontNumberClass">{{$index+1}}</div>
+                <div class="col col-67"><b class="verse_text" ng-class="fontSizeClass" ng-bind-html="book.name"></b></div>
+                <div class="col col-20"><i class="icon" ng-class="fontScriptClass">{{books.bookIndex[book.number].chapters.length}} ch.</i></div>
+            </ion-item>
+          </ion-list>
+          <ion-item class="item-icon-right item-royal"
+                    ng-class="fontUsageClass">
+            New Testament
+          </ion-item>
+          <ion-item class="row padding5" ng-repeat="book in books.new | filter : searchText"
+                    ng-class="{'item-assertive':selectedBook.number==book.number}"
+                    on-tap="selectBook(book.number)">
+            <div class="col col-center order-number" ng-class="fontNumberClass">{{$index+1}}</div>
+            <div class="col col-center col-67"><b class="verse_text" ng-class="fontSizeClass" ng-bind-html="book.name"></b></div>
+            <div class="col col-center col-20"><i class="icon" ng-class="fontScriptClass">{{books.bookIndex[book.number].chapters.length}} ch.</i></div>
+          </ion-item>
+        </ion-content>
+      </div>
+      <div class="col col-20 position-absolute top_bottom right0">
+        <ion-content>
+          <ion-item class="text-center"
+                    on-tap="selectChapter(chapter)"
+                    ng-repeat="chapter in selectedBook.chapters" ng-bind-html="chapter">
+          </ion-item>
+        </ion-content>
+      </div>
+    </ion-pane>
+  </ion-content>
+</ion-view>

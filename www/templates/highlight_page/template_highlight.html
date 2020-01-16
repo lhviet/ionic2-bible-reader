@@ -1,0 +1,78 @@
+
+<ion-side-menus enable-menu-with-back-views="false" ng-init="init()">
+  <ion-side-menu-content>
+
+    <ion-nav-bar class="bar-dark">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-ios-arrow-back" ui-sref="app.home">
+        </button>
+      </ion-nav-buttons>
+
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+        </button>
+      </ion-nav-buttons>
+
+    </ion-nav-bar>
+
+    <ion-nav-view name="menuContent"></ion-nav-view>
+
+  </ion-side-menu-content>
+
+  <ion-side-menu side="right">
+    <ion-header-bar class="item-input item-search">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="Search book" ng-model="searchText" ng-change="scrollTop()">
+      <span class="clear-search" on-tap="searchText=''">
+        <i class="icon ion-android-close"></i>
+      </span>
+    </ion-header-bar>
+    <ion-content scroll='false' padding="false">
+      <ion-pane class="row">
+        <div class="col col-80 position-absolute top_bottom left0">
+          <ion-content>
+            <ion-item class="item-icon-right item-royal"
+                      ng-class="fontUsageClass"
+                      on-tap="toggleGroup(oldNewGroup,0)">
+              Old Testament
+              <i class="icon ion-ios-paw-outline"></i>
+            </ion-item>
+            <ion-list ng-show="isGroupShown(oldNewGroup,0)">
+              <ion-item class="row padding5" ng-repeat="book in highlightedBooks.old | filter : searchText"
+                        ng-class="{'item-assertive':selectedBook.number==book.number}"
+                        on-tap="selectBook(book.number)">
+                <div class="col col-center order-number" ng-class="fontNumberClass">{{$index}}</div>
+                <div class="col col-67"><b class="verse_text" ng-class="fontSizeClass" ng-bind-html="book.name"></b></div>
+                <div class="col col-20"><i class="icon" ng-class="fontScriptClass">{{highlightedBooks.bookIndex[book.number].chapters.length}} ch.</i></div>
+              </ion-item>
+            </ion-list>
+            <ion-item class="item-icon-right item-royal"
+                      ng-class="fontUsageClass">
+              New Testament
+              <i class="icon ion-ios-paw-outline"></i>
+            </ion-item>
+            <ion-item class="row padding5" ng-repeat="book in highlightedBooks.new | filter : searchText"
+                      ng-class="{'item-assertive':selectedBook.number==book.number}"
+                      on-tap="selectBook(book.number)">
+              <div class="col col-center order-number" ng-class="fontNumberClass">{{$index}}</div>
+              <div class="col col-center col-67"><b class="verse_text" ng-class="fontSizeClass" ng-bind-html="book.name"></b></div>
+              <div class="col col-center col-20"><i class="icon" ng-class="fontScriptClass">{{highlightedBooks.bookIndex[book.number].chapters.length}} ch.</i></div>
+            </ion-item>
+          </ion-content>
+        </div>
+        <div class="col col-20 position-absolute top_bottom right0">
+          <ion-content>
+            <ion-item menu-close class="text-center"
+                      ng-class="[fontUsageClass,selectedBook.chapter==chapter?'item-assertive':'']"
+                      on-tap="selectChapter(chapter)"
+                      ng-repeat="chapter in selectedBook.chapters" ng-bind-html="chapter">
+            </ion-item>
+          </ion-content>
+        </div>
+      </ion-pane>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

@@ -1,0 +1,22 @@
+<div class="background-drop" on-tap="closePopoverHistory()"></div>
+<ion-popover-view>
+  <ion-header-bar class="item-icon-right text-left">
+    <h4>Short History ({{shortHistories.length}})</h4>
+    <i class="icon ion-ios-skipbackward color-grey" ui-sref="default.bookmark_history" on-tap="closePopupHistory()"></i>
+  </ion-header-bar>
+  <ion-content padding="false" has-bouncing="true">
+    <ion-list class="zebra-list">
+      <ion-item ng-if="shortHistories.length < 1" class="full-text padding5 center-text">
+        <b>No History!</b><br>
+        You have not read any chapter.
+      </ion-item>
+      <ion-item class="full-text" ng-repeat="historyItem in shortHistories track by $index"
+        on-tap="restoreBookmarkHistory(historyItem)">
+        <div class="row">
+          <div class="col col-75">{{ historyItem.book_name }}</div>
+          <div class="col text-center">{{ historyItem.chapter }}</div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-popover-view>

@@ -1,0 +1,391 @@
+<ion-view title="Bibles Management" ng-init="init()">
+  <ion-content>
+    <!-- ENGLISH -->
+      <ion-item menu-close class="item-icon-right" on-tap="toggleBibleGroup('en')"
+                ng-class="[fontUsageClass,isGroupShown(bibleGroup,'en')?'item-royal':'']">
+        English
+        <i class="icon ion-ios-paw-outline"></i>
+      </ion-item>
+      <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'en')">
+        <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.en track by $index">
+          <span class="bible-code">{{bible.code}}</span>
+          <br/>
+          <span ng-class="fontUsageClass">{{bible.label}}</span>
+          <br/>
+          <span ng-class="fontUsageClass">{{bible.description}}</span>
+          <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+             on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+          <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+            <ion-spinner icon="spiral"></ion-spinner>
+          </i>
+          <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+        </ion-item>
+      </ion-list>
+
+    <!-- VIETNAMESE -->
+    <ion-item menu-close class="item-icon-right" on-tap="toggleBibleGroup('vi')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'vi')?'item-royal':'']">
+      Tiếng Việt - Vietnamese
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'vi')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.vi track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- KOREAN -->
+    <ion-item menu-close class="item-icon-right" on-tap="toggleBibleGroup('kr')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'kr')?'item-royal':'']">
+      한국어 - Korean
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'kr')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.kr track by $index">
+      <span class="bible-code">{{bible.code}}</span>
+      <br/>
+      <span ng-class="fontUsageClass">{{bible.label}}</span>
+      <br/>
+      <span ng-class="fontUsageClass">{{bible.description}}</span>
+      <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+        on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+      <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+        <ion-spinner icon="spiral"></ion-spinner>
+      </i>
+      <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+    <!-- CHINESE -->
+    <ion-item menu-close class="item-icon-right" on-tap="toggleBibleGroup('zh')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'zh')?'item-royal':'']">
+      中国/中國 - Chinese
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'zh')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.zh track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- Hindi -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('hi')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'hi')?'item-royal':'']">
+      हिंदी - Hindi
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'hi')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.hi track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- SPANISH -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('es')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'es')?'item-royal':'']">
+      Español - Spanish
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'es')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.es track by $index" ng-show="isGroupShown(bibleGroup,'es')">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- French -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('fr')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'fr')?'item-royal':'']">
+      Français - French
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'fr')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.fr track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- German -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('de')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'de')?'item-royal':'']">
+      Deutsch - German
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'de')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.de track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- Italian -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('it')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'it')?'item-royal':'']">
+      Italiano - Italian
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'it')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.it track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- Czech -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('cs')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'cs')?'item-royal':'']">
+      Čeština - Czech
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'cs')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.cs track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- INDONESIAN -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('id')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'id')?'item-royal':'']">
+      Bahasa Indonesia - Indonesian
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'id')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.id track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- AMHARIC -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('am')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'am')?'item-royal':'']">
+      አማርኛ - Amharic
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'am')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.am track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- ARABIC -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('ar')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'ar')?'item-royal':'']">
+      العربية- Arabic
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'ar')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.ar track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- THAI -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('th')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'th')?'item-royal':'']">
+      ไทย - Thai
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'th')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.th track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- BURMESE -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('my')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'my')?'item-royal':'']">
+      ဗမာစာ - Burmese
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'my')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.my track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- KHMER -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('km')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'km')?'item-royal':'']">
+      ភាសាខ្មែរ - Khmer
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'km')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.km track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+    <!-- Hausa -->
+    <ion-item menu-close class="item-icon-right"
+              on-tap="toggleBibleGroup('ha')"
+              ng-class="[fontUsageClass,isGroupShown(bibleGroup,'ha')?'item-royal':'']">
+      هَوُسَ - Hausa
+      <i class="icon ion-ios-paw-outline"></i>
+    </ion-item>
+    <ion-list class="zebra-list" ng-show="isGroupShown(bibleGroup,'ha')">
+      <ion-item menu-close class="item-icon-right" ng-repeat="bible in bibles.ha track by $index">
+        <span class="bible-code">{{bible.code}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.label}}</span>
+        <br/>
+        <span ng-class="fontUsageClass">{{bible.description}}</span>
+        <i class="icon" ng-class="availableBibles.indexOf(bible.code)>-1? (primary_bible==bible.code?'ion-ios-checkmark-outline positive':'ion-ios-checkmark-outline') : 'ion-android-download'"
+          on-tap="downloadBible(bible.code)" ng-if="downloadingBibles.indexOf(bible.code)==-1"></i>
+        <i class="icon" ng-if="downloadingBibles.indexOf(bible.code)>-1">
+          <ion-spinner icon="spiral"></ion-spinner>
+        </i>
+        <i class="second-right-icon icon ion-ios-trash-outline" ng-if="availableBibles.indexOf(bible.code)>-1" on-tap="deleteBible(bible.code)"></i>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+
+</ion-view>

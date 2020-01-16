@@ -1,0 +1,16 @@
+
+<ion-view ng-init="init()">
+  <ion-nav-title>Recent Highlights</ion-nav-title>
+  <ion-content ng-class="fontUsageClass" padding="false" has-bouncing="true">
+    <ion-list class="zebra-list">
+      <ion-item ng-repeat="highlight in highlights track by $index" class="full-text" ng-class="fontSizeClass">
+        <div class="row" style="font-weight:700;">
+          {{getBookname(highlight.book_number)}} {{highlight.chapter}}:{{highlight.verse}}
+        </div>
+        <div class="row verse_text background-highlight"
+             ng-bind-html="highlight.text">
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

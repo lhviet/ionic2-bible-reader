@@ -1,0 +1,51 @@
+<ion-view title="About">
+  <ion-content class="about" ng-class="fontSizeClass">
+    <div class="row">
+      <div class="col col-34">Name</div>
+      <div class="col" ng-bind-html="appName"></div>
+    </div>
+    <div class="row">
+      <div class="col col-34">App version</div>
+      <div class="col" on-tap="openModalNotification()" ng-bind-html="curVersion + ' &#10143; Show Release Note!'"></div>
+    </div>
+    <div class="row">
+      <div class="col col-34">Updated</div>
+      <div class="col">2016 April 8</div>
+    </div>
+    <div class="row">
+      <div class="col col-34">Copyright</div>
+      <div class="col">Bibooki Mobile Studio</div>
+    </div>
+    <div class="row">
+      <div class="col col-34">Homepage</div>
+      <div class="col">http://bibooki.com</div>
+    </div>
+    <div class="row">
+      <div class="col col-34">Message</div>
+      <div class="col">
+        <p>Currently we are developing this NIV Bible Reader application as a work to serve God. This app is completely free and not for commercial purpose. Therefore, we are very appreciated for any donation from you. If you feel our work is good and helpful to your spirit life,
+          <br>
+          please donate by <b>PAYPAL</b> to:
+          <br>
+          <b>LHViet88</b>
+          <br>
+          Thank you for your help. God stay with you.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-34">Contact</div>
+      <div class="col">Please send email to inform us your idea:
+        <a href="mailto:mobile@bibooki.com?Subject=Bible%20Reader" target="_top">
+          mobile@bibooki.com
+        </a>
+      </div>
+    </div>
+    <div class="row row-center">
+      <div class="col col-25">Rating Us</div>
+      <div class="col col-offset-20">
+        <i style="font-size: 40px" class="icon ion-android-playstore balanced" on-tap="rating()"></i>
+      </div>
+    </div>
+  </ion-content>
+
+</ion-view>

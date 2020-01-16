@@ -1,0 +1,17 @@
+
+sudo chown -R username /Users/username
+
+To download resources, need to add below lines into info.plist
+
+<platform name="ios">
+ <config-file platform="ios" target="*-Info.plist" parent="NSAppTransportSecurity">
+ <dict>
+ <key>NSAllowsArbitraryLoads</key><true/>
+ </dict>
+ </config-file>
+</platform>
+
+
+Need to change the package into
+
+com.bibooki.mobile....ios

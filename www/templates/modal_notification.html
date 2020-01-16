@@ -1,0 +1,65 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">Release Note</h1>
+    <div class="buttons" on-tap="closeModalNotification()">
+      <i class="icon ion-ios-close"></i>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="about" ng-class="fontSizeClass">
+      <div class="row row-center" on-tap="rating()">
+        <div class="col col-25">
+          <i style="font-size: 40px" class="icon ion-android-playstore balanced"></i>
+        </div>
+        <div class="col" ng-bind-html="rateAppText"></div>
+      </div>
+      <div class="row row-center">
+        <div class="col col-25">Version</div>
+        <div class="col" ng-bind-html="curVersion"></div>
+      </div>
+      <div class="row row-center">
+        <div class="col"><b>New Feature</b></div>
+      </div>
+      <div class="row row-center">
+        <div class="col col-25">NIV Bible Reader</div>
+        <div class="col full-text borderBottomDashes">
+          Totally re-layout the application<br>
+        </div>
+      </div>
+      <div class="row row-center">
+        <div class="col col-25">Search Feature</div>
+        <div class="col full-text borderBottomDashes">
+          Adding search feature for chapter<br>
+        </div>
+      </div>
+      <div class="row row-center">
+        <div class="col col-25">Bookmark Feature</div>
+        <div class="col full-text borderBottomDashes">
+          Adding Bookmark & History functions for chapter<br>
+        </div>
+      </div>
+      <div class="row row-center">
+        <div class="col col-25">Speaking</div>
+        <div class="col full-text borderBottomDashes">
+          Allows speaking in American voice for English Bibles<br>
+        </div>
+      </div>
+      <div class="row row-center">
+        <div class="col col-25">Older Version</div>
+        <div class="col">1.0.8</div>
+      </div>
+      <div class="row row-center">
+        <div class="col col-25">Fix Bugs</div>
+        <div class="col full-text borderBottomDashes">
+          Fixed bugs & optimized the application.
+        </div>
+      </div>
+      <div class="row row-center">
+        <div class="col col-25">Remove</div>
+        <div class="col full-text borderBottomDashes">
+          Removed search books function in main page.
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

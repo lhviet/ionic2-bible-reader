@@ -1,0 +1,5 @@
+To run livereload
+
+ionic run -cls --address localhost --port 8100
+
+ionic state reset --> when deploy in new machine --> reload plugins from package.json
